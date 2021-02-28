@@ -7,6 +7,8 @@ else()
     project(${THIS} VERSION 0.0.1)
 endif()
 
+set(CMAKE_CXX_STANDARD 17)
+
 include_directories(lib)
 include_directories(src)
 
