@@ -11,7 +11,7 @@ include_directories(lib)
 include_directories(src)
 
 add_executable (Alligator src/main.cpp lib/alligator.h lib/keeper.h)
-set_target_properties(Alligator PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+set_target_properties(Alligator PROPERTIES CXX_STANDARD 14 CXX_STANDARD_REQUIRED ON)
 target_include_directories(Alligator PRIVATE "${CMAKE_BINARY_DIR}")
 
 

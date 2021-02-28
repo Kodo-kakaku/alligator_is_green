@@ -11,24 +11,24 @@ int factorial(const int x) {
 
 int main() {
     const unsigned SIZE = 10;
-    // Map with standard allocator
+    // Map with standard allocator and custom allocator
     std::map<int, int> classic_map;
     auto alligator_map = std::map<int, int, std::less<>, alligator<std::pair<const int, int>, SIZE>> {};
 
     for (size_t i = 0; i < SIZE; ++i) {
         const int res = factorial(i);
-        classic_map.try_emplace(i, res);
-        alligator_map.try_emplace(i, res);
+        classic_map.emplace(i, res);
+        alligator_map.emplace(i, res);
     }
 
-    for(const auto& [key, value] : classic_map) {
-        std::cout << key << " " << value << std::endl;
+    for(const auto& value : classic_map) {
+        std::cout << value.first << " " << value.second << std::endl;
     }
-    for(const auto& [key, value] : alligator_map) {
-        std::cout << key << " " << value << std::endl;
+    for(const auto& value : alligator_map) {
+        std::cout << value.first << " " << value.second << std::endl;
     }
 
-    // Custom container (List) with standard allocator
+    // Custom container keeper with standard allocator and custom allocator
     keeper<int> keeper_int;
     keeper<int, alligator<int, SIZE>> keeper_alligator;
 
