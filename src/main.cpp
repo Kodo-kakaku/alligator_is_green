@@ -19,15 +19,15 @@ int main() {
 
     for (size_t i = 0; i < SIZE; ++i) {
         const int res = factorial(i);
-        classic_map.try_emplace(i, res);
-        alligator_map.try_emplace(i, res);
+        classic_map.emplace(i, res);
+        alligator_map.emplace(i, res);
     }
 
-    for (const auto&[key, value] : classic_map) {
-        std::cout << key << " " << value << '\n';
+    for (const auto& value : classic_map) {
+        std::cout << value.first << " " << value.second << '\n';
     }
-    for (const auto&[key, value] : alligator_map) {
-        std::cout << key << " " << value << '\n';
+    for (const auto& value : alligator_map) {
+        std::cout << value.first << " " << value.second << '\n';
     }
 
     // Custom container keeper with standard allocator and custom allocator
