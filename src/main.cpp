@@ -10,39 +10,42 @@ int factorial(const int x) {
 }
 
 int main() {
-    const unsigned SIZE = 10;
+
+    constexpr size_t SIZE = 10;
+
     // Map with standard allocator and custom allocator
     std::map<int, int> classic_map;
-    auto alligator_map = std::map<int, int, std::less<>, alligator<std::pair<const int, int>, SIZE>> {};
+    std::map<int, int, std::less<>, Alligator<std::pair<const int, int>, SIZE>> alligator_map;
 
     for (size_t i = 0; i < SIZE; ++i) {
         const int res = factorial(i);
-        classic_map.emplace(i, res);
-        alligator_map.emplace(i, res);
+        classic_map.try_emplace(i, res);
+        alligator_map.try_emplace(i, res);
     }
 
-    for(const auto& value : classic_map) {
-        std::cout << value.first << " " << value.second << std::endl;
+    for (const auto&[key, value] : classic_map) {
+        std::cout << key << " " << value << '\n';
     }
-    for(const auto& value : alligator_map) {
-        std::cout << value.first << " " << value.second << std::endl;
+    for (const auto&[key, value] : alligator_map) {
+        std::cout << key << " " << value << '\n';
     }
 
     // Custom container keeper with standard allocator and custom allocator
-    keeper<int> keeper_int;
-    keeper<int, alligator<int, SIZE>> keeper_alligator;
+    Keeper<int> keeper_int;
+    Keeper<int, Alligator<int, SIZE>> keeper_alligator;
 
     for (size_t i = 0; i < SIZE; ++i) {
-        keeper_int.add_element(i);
-        keeper_alligator.add_element(i);
+        keeper_int.append(i);       // like python 0_0
+        keeper_alligator.append(i); // like python 0_0
     }
 
-    for (const auto& value: keeper_int) {
-        std::cout << value << std::endl;
+    for(const auto &value : keeper_int) {
+        std::cout << value << '\n';
     }
-    for (const auto& value: keeper_alligator) {
-        std::cout << value << std::endl;
+    for(const auto &value : keeper_alligator) {
+        std::cout << value << '\n';
     }
+    std::cout << std::endl;
 
     return 0;
 }
