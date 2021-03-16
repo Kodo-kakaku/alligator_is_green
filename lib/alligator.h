@@ -31,7 +31,7 @@ struct Alligator {
 
     T *allocate(std::size_t n) {
         if (current_size_ + n > max_size_) {
-            std::__throw_bad_alloc();
+            std::bad_alloc();
         }
         auto cur_data = &data_[current_size_];
         current_size_ += n;
